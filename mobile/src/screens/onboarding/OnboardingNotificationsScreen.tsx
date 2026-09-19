@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { requestNotifications } from 'react-native-permissions';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch } from '../../hooks/redux';
@@ -7,9 +7,10 @@ import { updateProfile } from '../../store/authSlice';
 import AppButton from '../../components/AppButton';
 import OnboardingProgress from '../../components/OnboardingProgress';
 import Screen from '../../components/Screen';
-import { Bell } from '../../components/icons';
 import { colors, spacing, typography } from '../../theme';
 import type { OnboardingStackParamList } from '../../navigation/types';
+
+const illustration = require('../../assets/illustrations/success.png');
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'Notifications'>;
 
@@ -47,9 +48,7 @@ export default function OnboardingNotificationsScreen(_props: Props) {
       </Text>
 
       <View style={styles.illustration}>
-        <View style={styles.bellCircle}>
-          <Bell size={56} color={colors.primary} strokeWidth={1.75} />
-        </View>
+        <Image source={illustration} style={styles.illustrationImage} resizeMode="contain" />
       </View>
 
       <View style={styles.footer}>
@@ -82,13 +81,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bellCircle: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: colors.surfaceAlt,
-    alignItems: 'center',
-    justifyContent: 'center',
+  illustrationImage: {
+    width: '90%',
+    height: 260,
   },
   footer: {
     paddingBottom: spacing.lg,

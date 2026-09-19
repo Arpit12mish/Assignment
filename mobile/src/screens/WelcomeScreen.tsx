@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { googleLogin } from '../store/authSlice';
@@ -9,6 +9,8 @@ import Screen from '../components/Screen';
 import { Check } from '../components/icons';
 import { colors, spacing, typography } from '../theme';
 import type { AuthStackParamList } from '../navigation/types';
+
+const illustration = require('../assets/illustrations/planning.png');
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Welcome'>;
 
@@ -24,6 +26,7 @@ export default function WelcomeScreen({ navigation }: Props) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.hero}>
+        <Image source={illustration} style={styles.illustration} resizeMode="contain" />
         <View style={styles.brandMark}>
           <Check size={22} color={colors.onColor} strokeWidth={3} />
         </View>
@@ -63,8 +66,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   hero: {
-    marginTop: spacing.xxl * 1.6,
+    marginTop: spacing.lg,
     alignItems: 'flex-start',
+  },
+  illustration: {
+    width: '100%',
+    height: 240,
+    alignSelf: 'center',
+    marginBottom: spacing.sm,
   },
   brandMark: {
     width: 40,

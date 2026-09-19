@@ -22,6 +22,7 @@ import AppButton from '../components/AppButton';
 import PrioritySelector from '../components/PrioritySelector';
 import Screen from '../components/Screen';
 import MicBadge from '../components/MicBadge';
+import Waveform from '../components/Waveform';
 import { AlertTriangle, Calendar, Mic, X } from '../components/icons';
 import { formatFieldDateTime } from '../utils/dateUtils';
 import { colors, radius, spacing, typography } from '../theme';
@@ -256,9 +257,15 @@ export default function AddEditTaskScreen({ navigation, route }: Props) {
                 <Text style={styles.voiceCardText}>Understanding what you said…</Text>
               </>
             ) : voiceListening ? (
-              <Text style={styles.voiceCardText} numberOfLines={2}>
-                {partialTranscript || 'Listening… tap to stop'}
-              </Text>
+              <>
+                <View style={styles.voiceCardTextGroup}>
+                  <Text style={styles.voiceCardText} numberOfLines={1}>
+                    {partialTranscript || 'Listening…'}
+                  </Text>
+                  <Text style={styles.voiceCardSubtext}>Tap to stop</Text>
+                </View>
+                <Waveform active barCount={4} height={22} color={colors.primary} />
+              </>
             ) : (
               <>
                 <View style={styles.voiceCardTextGroup}>
@@ -351,7 +358,7 @@ export default function AddEditTaskScreen({ navigation, route }: Props) {
                 {resolvingField === 'dateTime' ? (
                   isListening ? (
                     <View style={styles.voiceMissingContent}>
-                      <Mic size={13} color={colors.warning} strokeWidth={2.25} />
+                      <Waveform active barCount={3} height={13} color={colors.warning} />
                       <Text style={styles.voiceMissingText}>Listening… tap to stop</Text>
                     </View>
                   ) : (
@@ -401,7 +408,7 @@ export default function AddEditTaskScreen({ navigation, route }: Props) {
                 {resolvingField === 'deadline' ? (
                   isListening ? (
                     <View style={styles.voiceMissingContent}>
-                      <Mic size={13} color={colors.warning} strokeWidth={2.25} />
+                      <Waveform active barCount={3} height={13} color={colors.warning} />
                       <Text style={styles.voiceMissingText}>Listening… tap to stop</Text>
                     </View>
                   ) : (

@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppButton from '../../components/AppButton';
 import OnboardingProgress from '../../components/OnboardingProgress';
 import Screen from '../../components/Screen';
+import { Mic } from '../../components/icons';
 import { colors, radius, spacing, typography } from '../../theme';
 import type { OnboardingStackParamList } from '../../navigation/types';
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'Categories'>;
 
 const SUGGESTIONS = ['Work', 'Personal', 'Study', 'Health', 'Finance', 'Errands'];
+const illustration = require('../../assets/illustrations/voice.png');
 
 // Step 2 of 4. Todoist asks "personal or team use" here, but this app has no team
 // concept — adapted instead into picking starter categories, which have a real payoff:
@@ -50,6 +52,16 @@ export default function OnboardingCategoriesScreen({ navigation }: Props) {
             </Pressable>
           );
         })}
+      </View>
+
+      <View style={styles.tip}>
+        <Image source={illustration} style={styles.tipImage} resizeMode="contain" />
+        <View style={styles.tipTextRow}>
+          <Mic size={14} color={colors.textSecondary} strokeWidth={2.25} />
+          <Text style={styles.tipText}>
+            Pro tip: you can also just speak your tasks — look for the mic button.
+          </Text>
+        </View>
       </View>
 
       <View style={styles.footer}>
@@ -101,8 +113,29 @@ const styles = StyleSheet.create({
   chipTextActive: {
     color: colors.onColor,
   },
+  tip: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: spacing.lg,
+  },
+  tipImage: {
+    width: '85%',
+    height: 220,
+  },
+  tipTextRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.xs,
+    marginTop: spacing.sm,
+  },
+  tipText: {
+    ...typography.caption,
+    color: colors.textSecondary,
+    flexShrink: 1,
+    textAlign: 'center',
+  },
   footer: {
-    marginTop: 'auto',
     paddingBottom: spacing.lg,
   },
 });

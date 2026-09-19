@@ -161,16 +161,20 @@ export default function TaskListScreen({ navigation }: Props) {
         )}
       />
 
-      <Pressable
-        style={styles.micFab}
-        onPress={() => navigation.navigate('AddEditTask', { autoStartVoice: true })}
-        hitSlop={4}
-      >
-        <MicBadge size={52} />
-      </Pressable>
-      <Pressable style={styles.fab} onPress={() => navigation.navigate('AddEditTask', undefined)}>
-        <Plus size={28} color={colors.onColor} strokeWidth={2.5} />
-      </Pressable>
+      {items.length > 0 && (
+        <>
+          <Pressable
+            style={styles.micFab}
+            onPress={() => navigation.navigate('AddEditTask', { autoStartVoice: true })}
+            hitSlop={4}
+          >
+            <MicBadge size={52} />
+          </Pressable>
+          <Pressable style={styles.fab} onPress={() => navigation.navigate('AddEditTask', undefined)}>
+            <Plus size={28} color={colors.onColor} strokeWidth={2.5} />
+          </Pressable>
+        </>
+      )}
 
       <ConfirmDialog
         visible={deletingTaskId !== null}
